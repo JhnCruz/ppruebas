@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prueba de Phishing</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>🔍 Identifica el Phishing</h1>
+        <p>Selecciona el mensaje que crees que es un intento de phishing.</p>
+        <div class="info-box" id="phishing-question">Cargando pregunta...</div>
+
+        <div class="card-container">
+            <button class="card" id="optionA" onclick="verificarRespuesta('A')">Cargando...</button>
+            <button class="card" id="optionB" onclick="verificarRespuesta('B')">Cargando...</button>
+            <button class="card" id="optionC" onclick="verificarRespuesta('C')">Cargando...</button>
+        </div>
+
+        <p id="feedback"></p>
+        <p id="question-counter">Pregunta 1 de 5</p>
+
+        <div class="button-container">
+            <button class="button back-btn" onclick="window.location.href='/info'">Regresar</button>
+        </div>
+    </div>
+
+    <script>
+        function cargarPregunta() {
+            fetch('/generate_question', {
+                method: 'GET',
+                headers: { 'Content-Type': 'application/json' }
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('optionA').innerText = data.opcionA;
+                document.getElementById('optionB').innerText = data.opcionB;
+                document.getElementById('optionC').innerText = data.opcionC;
+                window.correctAnswer = data.respuesta_correcta;
+            })
+            .catch(error => console.error('Error al obtener pregunta:', error));
+        }
+
+        function verificarRespuesta(opcion) {
+            let feedback = document.getElementById('feedback');
+            if (opcion === window.correctAnswer) {
+                feedback.innerText = '✅ ¡Correcto!';
+                feedback.style.color = 'green';
+            } else {
+                feedback.innerText = '❌ ¡Incorrecto!';
+                feedback.style.color = 'red';
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', cargarPregunta);
+    </script>
+</body>
+</html>

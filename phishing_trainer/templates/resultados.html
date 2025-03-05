@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resultados de la Prueba</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>📊 Resultados de la Prueba</h1>
+        <p>Has completado la prueba de phishing. Aquí están tus resultados:</p>
+
+        <div class="info-box">
+            <p><strong>Preguntas correctas:</strong> <span id="aciertos"></span></p>
+            <p><strong>Preguntas incorrectas:</strong> <span id="errores"></span></p>
+        </div>
+
+        <div class="button-container">
+            <button class="button back-btn" onclick="window.location.href='/info'">Volver a Información</button>
+            <button class="button test-btn" onclick="window.location.href='/prueba'">Reintentar Prueba</button>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            let resultados = JSON.parse(localStorage.getItem('resultados')) || { aciertos: 0, errores: 0 };
+            document.getElementById('aciertos').innerText = resultados.aciertos;
+            document.getElementById('errores').innerText = resultados.errores;
+            localStorage.removeItem('resultados');
+        });
+    </script>
+</body>
+</html>
