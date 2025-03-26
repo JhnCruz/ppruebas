@@ -82,7 +82,7 @@ def obtener_respuestas():
         lista_respuestas = [
             {
                 "uid": uid,
-                "error": datos.get("error", ""),
+                "calidadrespuesta": datos.get("calidadrespuesta", ""),
                 "pregunta": datos.get("pregunta", ""),
                 "respuesta": datos.get("respuesta", "")
             }
