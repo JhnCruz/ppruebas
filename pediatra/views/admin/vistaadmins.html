@@ -1,0 +1,302 @@
+$def with (administradores)
+
+<style>
+    .tit {
+        text-align: center;
+        font-weight: bold;
+        margin-top: 8%;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        font-size: 40px;
+        margin-bottom: 8%;
+    }
+
+    table {
+        width: 80%;
+        margin: 20px auto;
+        border-collapse: collapse;
+        background-color: #fff;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+        overflow: hidden;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    th, td {
+        padding: 12px;
+        text-align: center;
+        border-bottom: 1px solid #ddd;
+    }
+
+    th {
+        background-color: #c6d6e6;
+        color: white;
+        text-transform: uppercase;
+        font-size: 14px;
+    }
+
+    .btn {
+        background-color: #61c758;
+        color: white;
+        padding: 8px 12px;
+        border: none;
+        border-radius: 5px;
+        font-size: 14px;
+        text-decoration: none;
+        display: inline-block;
+        margin: 2px;
+        transition: 0.3s;
+    }
+
+    .btn:hover {
+        background-color: #45a049;
+    }
+
+    .btn-delete {
+        background-color: #d9534f;
+    }
+
+    .btn-delete:hover {
+        background-color: #c9302c;
+    }
+
+    .btn-edit {
+        background-color: #f0ad4e;
+    }
+
+    .btn-edit:hover {
+        background-color: #ec971f;
+    }
+
+    select {
+        padding: 8px;
+        border-radius: 5px;
+        font-size: 14px;
+    }
+
+
+
+    .modal {
+        display: none;
+        position: fixed;
+        z-index: 1;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0,0,0,0.4);
+        padding-top: 60px;
+        box-sizing: border-box;
+    }
+
+    .modal-content {
+        background-color: #fefefe;
+        margin: 8% auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 80%;
+        max-width: 500px;
+        border-radius: 10px;
+    }
+
+    .modal-content2 {
+        background-color: #fefefe;
+        margin: 5% auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 80%;
+        max-width: 500px;
+        border-radius: 10px;
+    }
+
+    .close {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+    }
+
+    .close:hover,
+    .close:focus {
+        color: black;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+    .contenedor1 {
+        width: 460px;
+        padding: 30px;
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    .modal-header {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 15px;
+        margin-bottom: 25px;
+    }
+    .subtitle {
+        font-size: 22px;
+        margin: 0;
+    }
+    .fotoperfil {
+        width: 70px;
+        height: 70px;
+        background-color: #ccc;
+        border-radius: 50%;
+    }
+    .form-container {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+    }
+    .full-width {
+        grid-column: span 2;
+    }
+    label {
+        display: block;
+        font-weight: bold;
+        margin-bottom: 5px;
+    }
+    input {
+        width: calc(100% - 16px);
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 14px;
+        background-color: white;
+        appearance: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+    }
+    .button-container {
+        text-align: center;
+        margin-top: 50px;
+    }
+    .editt {
+        background-color: #000000;
+        color: white;
+        border: none;
+        padding: 12px 20px;
+        font-size: 16px;
+        border-radius: 5px;
+        cursor: pointer;
+        width: 70%;
+        transition: transform 0.2s ease-in-out;
+    }
+    .editt:hover {
+        background-color: #ccc;
+        transform: scale(1.05);
+    }
+</style>
+
+<h1 class="tit">Vista Administradores</h1>
+
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        $for admin in administradores:
+            <tr>
+                <td>$admin["uid"]</td>
+                <td>$admin["nombre"]</td>
+                <td>
+                    <select>
+                        <option>Activo</option>
+                        <option>Inactivo</option>
+                    </select>
+                    <a href="javascript:void(0)" onclick="openInfoAdminModal()" class="btn">📄 Ver</a>
+                    <a href="/editar_admin/$admin['uid']" class="btn btn-edit">✏️ Editar</a>
+                    <a href="/eliminar_admin/$admin['uid']" class="btn btn-delete">🗑️ Eliminar</a>
+                </td>
+            </tr>
+    </tbody>
+</table>
+<div id="infoAdminModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeInfoAdminModal()">&times;</span>
+        <div class="modal-header">
+            <h2>Información del Administrador</h2>
+            <div class="fotoperfil"></div>
+        </div>
+        <div class="form-container">
+            <div>
+                <label for="nombre">Nombre:</label>
+                <input type="text" id="nombre" name="nombre" readonly>
+            </div>
+            <div>
+                <label for="primer-apellido">Primer Apellido:</label>
+                <input type="text" id="apellido1" name="apellido1" readonly>
+            </div>
+            <div>
+                <label for="segundo-apellido">Segundo Apellido:</label>
+                <input type="text" id="apellido2" name="apellido2" readonly>
+            </div>
+            <div>
+                <label for="telefono">Teléfono:</label>
+                <input type="tel" id="telefono" name="telefono" readonly>
+            </div>
+            <div>
+                <label for="correo">Correo:</label>
+                <input type="email" id="correo" name="correo" readonly>
+            </div>
+            <div>
+                <label for="rango">Rango del Administrador:</label>
+                <input type="text" id="rango" name="rango" readonly>
+            </div>
+        </div>
+        <div>
+            <button style="margin-top: 30px; width: 60%; margin-left: 20%;" type="button" class="editt">Editar</button>
+        </div>
+    </div>
+</div>
+
+<div id="closeSesionModal" class="modal">
+    <div class="modal-content3">
+        <div class="title3">
+            <h1 class="addvert">¿Estás seguro que quieres eliminar este usuario?</h1>
+        </div>
+        <p class="warning">Al eliminarlo, no podras acceder a este registro nunca más.</p>
+        <div class="button-container1">
+            <button class="closes">Eliminar</button>
+            <button class="closes cancel-closes" onclick="closeCloseSesionModal()">Cancelar</button>
+        </div>
+    </div>
+</div>
+<script>
+    // Ver Información del Administrador
+    function openInfoAdminModal() {
+        document.getElementById('infoAdminModal').style.display = 'block';
+    }
+    
+    function closeInfoAdminModal() {
+        document.getElementById('infoAdminModal').style.display = 'none';
+    }
+
+    // Agregar Información del Administrador
+    function openNewAdminModal() {
+        document.getElementById('newAdminModal').style.display = 'block';
+    }
+
+    function closeNewAdminModal() {
+        document.getElementById('newAdminModal').style.display = 'none';
+    }
+
+    // Cerrar Sesión
+
+    function openCloseSesionModal() {
+        document.getElementById('closeSesionModal').style.display = 'block';
+    }
+
+    function closeCloseSesionModal() {
+        document.getElementById('closeSesionModal').style.display = 'none';
+    }
+
+</script>
