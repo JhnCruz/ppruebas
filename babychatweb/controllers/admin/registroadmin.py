@@ -9,13 +9,13 @@ class RegistroAdmin:
             datos = web.input()
             
             # Validaciones
-            if not self.validar_nombre(datos.nombre) or not self.validar_nombre(datos.apellido1) or not self.validar_nombre(datos.apellido2):
+            if not self.validar_nombre(datos.nombres) or not self.validar_nombre(datos.primer_apellido) or not self.validar_nombre(datos.segundo_apellido):
                 return json.dumps({"status": "error", "message": "Los nombres solo pueden contener letras y espacios."})
             
             if not self.validar_telefono(datos.telefono):
                 return json.dumps({"status": "error", "message": "El teléfono debe contener solo números (10 dígitos)."})
             
-            if not self.validar_correo(datos.correo):
+            if not self.validar_email(datos.email):
                 return json.dumps({"status": "error", "message": "Formato de correo inválido."})
             
             if datos.rango not in ["superadmin", "respuestas"]:
@@ -29,11 +29,11 @@ class RegistroAdmin:
 
             # Registrar en Firebase
             resultado = registrar_admin(
-                datos.nombre.strip(),
-                datos.apellido1.strip(),
-                datos.apellido2.strip(),
+                datos.nombres.strip(),
+                datos.primer_apellido.strip(),
+                datos.segundo_apellido.strip(),
                 datos.telefono.strip(),
-                datos.correo.strip(),
+                datos.email.strip(),
                 datos.rango.strip(),
                 datos.contrasena.strip()
             )
@@ -52,8 +52,8 @@ class RegistroAdmin:
     def validar_telefono(self, telefono):
         return bool(re.match(r"^\d{10}$", telefono))  # 10 dígitos
 
-    def validar_correo(self, correo):
-        return bool(re.match(r"^[\w\.-]+@[\w\.-]+\.\w+$", correo))
+    def validar_email(self, email):
+        return bool(re.match(r"^[\w\.-]+@[\w\.-]+\.\w+$", email))
 
     def validar_password(self, password):
         return bool(re.match(r"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,}$", password))

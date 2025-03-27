@@ -1,0 +1,74 @@
+$def with (pedia)
+<style>
+    h1 {
+        text-align: center;
+        font-weight: bold;
+        margin-top: 8%;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        font-size: 40px;
+        margin-bottom: 2%;
+    }
+
+    .infoo {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+        margin-left: 32%;
+        border-radius: 10px;
+        border: 1px solid #ccc;
+        width: 400px;
+        height: 400px;
+        box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2); /* Sombra suave */
+    }
+
+    p {
+        display: flex;
+        gap: 5px;
+    }
+
+    .infoo p {
+        align-self: flex-start;
+        margin-left: 25px;
+    }
+
+    .back {
+        align-self: center;
+        margin-top: 20px;
+        background-color: #000000;
+        color: #ffffff;
+        padding: 12px 35px;
+        text-decoration: none;
+        border-radius: 10px;
+        font-size: 16px;
+        font-weight: bold;
+        border: none;
+        cursor: pointer;
+        transition: background-color 0.3s ease, transform 0.2s ease-in-out;
+        box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.3);
+    }
+
+
+    .back:hover {
+        background-color: #444;
+        transform: scale(1.05);
+        box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.4);
+    }
+
+    .back:active {
+        transform: scale(0.98);
+        box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.2);
+    }
+</style>
+
+<h1>Detalles del Administrador</h1>
+<div class="infoo">
+    <p><strong>Nombre:</strong> $pedia.get("nombres", "")</p>
+    <p><strong>Primer Apellido:</strong> $pedia.get("primer_apellido", "")</p>
+    <p><strong>Segundo Apellido:</strong> $pedia.get("segundo_apellido", "")</p>
+    <p><strong>Cedula Medica:</strong>$pedia.get("licencia", "")</p>
+    <p><strong>Correo Electrónico:</strong> $pedia.get("email", "")</p>
+    <p><strong>Fecha de Nacimiento:</strong>$pedia.get("nacimiento", "")</p>
+    <a href="/vistapediatras" class="back">Volver</a>
+</div>
+

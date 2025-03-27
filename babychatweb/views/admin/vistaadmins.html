@@ -206,97 +206,16 @@ $def with (administradores)
         $for admin in administradores:
             <tr>
                 <td>$admin["uid"]</td>
-                <td>$admin["nombre"]</td>
+                <td>$admin["nombres"]</td>
                 <td>
                     <select>
                         <option>Activo</option>
                         <option>Inactivo</option>
                     </select>
-                    <a href="javascript:void(0)" onclick="openInfoAdminModal()" class="btn">📄 Ver</a>
+                    <a href="/ver_admin/$admin['uid']" class="btn">📄 Ver</a>
                     <a href="/editar_admin/$admin['uid']" class="btn btn-edit">✏️ Editar</a>
-                    <a href="/eliminar_admin/$admin['uid']" class="btn btn-delete">🗑️ Eliminar</a>
+                    <a href="/confirmar_eliminacion/$admin['uid']" class="btn btn-delete">🗑️ Eliminar</a>
                 </td>
             </tr>
     </tbody>
 </table>
-<div id="infoAdminModal" class="modal">
-    <div class="modal-content">
-        <span class="close" onclick="closeInfoAdminModal()">&times;</span>
-        <div class="modal-header">
-            <h2>Información del Administrador</h2>
-            <div class="fotoperfil"></div>
-        </div>
-        <div class="form-container">
-            <div>
-                <label for="nombre">Nombre:</label>
-                <input type="text" id="nombre" name="nombre" readonly>
-            </div>
-            <div>
-                <label for="primer-apellido">Primer Apellido:</label>
-                <input type="text" id="apellido1" name="apellido1" readonly>
-            </div>
-            <div>
-                <label for="segundo-apellido">Segundo Apellido:</label>
-                <input type="text" id="apellido2" name="apellido2" readonly>
-            </div>
-            <div>
-                <label for="telefono">Teléfono:</label>
-                <input type="tel" id="telefono" name="telefono" readonly>
-            </div>
-            <div>
-                <label for="correo">Correo:</label>
-                <input type="email" id="correo" name="correo" readonly>
-            </div>
-            <div>
-                <label for="rango">Rango del Administrador:</label>
-                <input type="text" id="rango" name="rango" readonly>
-            </div>
-        </div>
-        <div>
-            <button style="margin-top: 30px; width: 60%; margin-left: 20%;" type="button" class="editt">Editar</button>
-        </div>
-    </div>
-</div>
-
-<div id="closeSesionModal" class="modal">
-    <div class="modal-content3">
-        <div class="title3">
-            <h1 class="addvert">¿Estás seguro que quieres eliminar este usuario?</h1>
-        </div>
-        <p class="warning">Al eliminarlo, no podras acceder a este registro nunca más.</p>
-        <div class="button-container1">
-            <button class="closes">Eliminar</button>
-            <button class="closes cancel-closes" onclick="closeCloseSesionModal()">Cancelar</button>
-        </div>
-    </div>
-</div>
-<script>
-    // Ver Información del Administrador
-    function openInfoAdminModal() {
-        document.getElementById('infoAdminModal').style.display = 'block';
-    }
-    
-    function closeInfoAdminModal() {
-        document.getElementById('infoAdminModal').style.display = 'none';
-    }
-
-    // Agregar Información del Administrador
-    function openNewAdminModal() {
-        document.getElementById('newAdminModal').style.display = 'block';
-    }
-
-    function closeNewAdminModal() {
-        document.getElementById('newAdminModal').style.display = 'none';
-    }
-
-    // Cerrar Sesión
-
-    function openCloseSesionModal() {
-        document.getElementById('closeSesionModal').style.display = 'block';
-    }
-
-    function closeCloseSesionModal() {
-        document.getElementById('closeSesionModal').style.display = 'none';
-    }
-
-</script>

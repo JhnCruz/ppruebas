@@ -1,3 +1,5 @@
+$def with (pacientes)
+
 <style>
     .tit {
         margin-bottom: 10%;
@@ -121,20 +123,19 @@
                 <th>Acciones</th>
             </tr>
         </thead>
-        
+        $for padre in pacientes:
         <tbody>
             <tr>
-                <td>01</td>
-                <td>Jonathan Cruz</td>
+                <td>$padre["uid"]</td>
+                <td>$padre["nombres"]</td>
                 <td>
                     <div class="acciones">
                         <select>
                             <option>Activo</option>
                             <option>Inactivo</option>
                         </select>
-                        <a href="/ver_persona" class="btn">📄 Ver</a>
-                        <a href="/editar_persona" class="btn btn-edit">✏️ Editar</a>
-                        <a href="/eliminar_persona" class="btn btn-delete">🗑️ Eliminar</a>
+                        <a href="/ver_pacientes/$padre['uid']" class="btn">📄 Ver</a>
+                        <a href="/confirmar_eliminacion_padre/$padre['uid']" class="btn btn-delete">🗑️ Eliminar</a>
                     </div>
                 </td>                
             </tr>

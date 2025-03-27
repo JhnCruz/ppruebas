@@ -1,0 +1,26 @@
+$def with (admin)
+
+<h1>Editar Administrador</h1>
+
+<form method="POST" action="/editar_admin/$admin.get('uid', '')">
+    <label>Nombre:</label>
+    <input type="text" name="nombre" value="$admin.get('nombre', '')" required>
+
+    <label>Primer Apellido:</label>
+    <input type="text" name="apellido1" value="$admin.get('apellido1', '')" required>
+
+    <label>Segundo Apellido:</label>
+    <input type="text" name="apellido2" value="$admin.get('apellido2', '')" required>
+
+    <label>Teléfono:</label>
+    <input type="text" name="telefono" value="$admin.get('telefono', '')" required>
+
+    <label>Correo Electrónico:</label>
+    <input type="email" name="correo" value="$admin.get('correo', '')" required>
+
+    <label>Rango:</label>
+    <input type="text" name="rango" value="$admin.get('rango', '')" required>
+
+    <button type="submit">Actualizar</button>
+    <a href="/vistaadmins">Cancelar</a>
+</form>

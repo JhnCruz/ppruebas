@@ -127,16 +127,15 @@ $def with (pediatras)
         <tbody>
             <tr>
                 <td>$pedia["uid"]</td>
-                <td>$pedia["nombre"]</td>
+                <td>$pedia["nombres"]</td>
                 <td>
                     <div class="acciones">
                         <select>
                             <option>Activo</option>
                             <option>Inactivo</option>
                         </select>
-                        <a href="/ver_persona" class="btn">📄 Ver</a>
-                        <a href="/editar_persona" class="btn btn-edit">✏️ Editar</a>
-                        <a href="/eliminar_persona" class="btn btn-delete">🗑️ Eliminar</a>
+                        <a href="/ver_pedia/$pedia['uid']" class="btn">📄 Ver</a>
+                        <a href="/confirmar_eliminacion_pedia/$pedia['uid']" class="btn btn-delete">🗑️ Eliminar</a>
                     </div>
                 </td>                
             </tr>
