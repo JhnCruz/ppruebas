@@ -6,28 +6,34 @@ render = web.template.render("views/admin", base="../master1")
 class EditarAdmin:
     def GET(self, uid):
         try:
+            print(f"UID recibido: {uid}")  # Debug
             admin = obtener_admin(uid)
             if not admin:
                 return "Error: Administrador no encontrado."
+            
+            print(f"Administrador obtenido: {admin}")  # Debug
             return render.editar_admin(admin)
         except Exception as e:
             print(f"Error en EditarAdmin GET: {str(e)}")
-            return "Error al cargar la página de edición."
+            return "Error al cargar la página."
 
     def POST(self, uid):
         try:
-            form = web.input()
+            datos = web.input()
             datos_actualizados = {
-                "nombre": form.nombre,
-                "apellido1": form.apellido1,
-                "apellido2": form.apellido2,
-                "telefono": form.telefono,
-                "correo": form.correo,
-                "rango": form.rango
+                "nombres": datos.nombres,
+                "primer_apellido": datos.primer_apellido,
+                "segundo_apellido": datos.segundo_apellido,
+                "telefono": datos.telefono,
+                "email": datos.email,
+                "rango": datos.rango
             }
+            
+            resultado = actualizar_admin(uid, datos_actualizados)
 
-            if actualizar_admin(uid, datos_actualizados):
-                raise web.seeother("/vistaadmins")
+            if resultado:
+                print(f"✅ Administrador {uid} actualizado correctamente.")
+                return web.seeother("/vistaadmins")
             else:
                 return "Error al actualizar el administrador."
         except Exception as e:

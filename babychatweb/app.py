@@ -12,10 +12,10 @@ from controllers.admin.registroadmin import RegistroAdmin
 from controllers.eliminar_admin import EliminarAdmin, ConfirmarEliminacion
 from controllers.eliminar_pedia import EliminarPedia, ConfirmarEliminacionPedia
 from controllers.eliminar_padre import EliminarPadre, ConfirmarEliminacionPadre
-from controllers.admin.editar_admin import EditarAdmin
 from controllers.admin.ver_admin import VerAdmin
 from controllers.admin.ver_pediatra import VerPedia
 from controllers.admin.ver_pacientes import VerPacientes
+from controllers.admin.editar_admin import EditarAdmin
 
 web.config.debug = False  
 
@@ -29,7 +29,6 @@ urls = (
     '/vistapediatras', 'VistaPediatras',
     '/vistapacientes', 'VistaPacientes',
     '/vistarespuestas', 'VistaRespuestas',
-    '/editar_admin/(.*)', 'EditarAdmin',
     "/eliminar_admin/(.*)", "EliminarAdmin",
     "/confirmar_eliminacion/(.*)", "ConfirmarEliminacion",
     "/eliminar_pedia/(.*)", "EliminarPedia",
@@ -39,7 +38,8 @@ urls = (
     "/ver_admin/(.*)", "VerAdmin",
     "/ver_pedia/(.*)", "VerPedia",
     "/ver_pacientes/(.*)", "VerPacientes",
-    '/vistareportes', 'VistaReportes'
+    '/vistareportes', 'VistaReportes',
+    "/editar_admin/(.*)", "EditarAdmin"
 )
 
 app = web.application(urls, globals())

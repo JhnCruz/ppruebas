@@ -181,7 +181,7 @@ def obtener_reportes():
         return []
 
 def obtener_admin(uid):
-    """Obtiene la información de un administrador por UID."""
+    """Obtiene la información de un pediatra por UID."""
     try:
         admin = db.child("usuarios").child(uid).get().val()
         return admin if admin else None
@@ -204,7 +204,7 @@ def obtener_pedia(uid):
         pedia = db.child("usuarios").child(uid).get().val()
         return pedia if pedia else None
     except Exception as e:
-        print(f"Error al obtener admin: {str(e)}")
+        print(f"Error al obtener pedia: {str(e)}")
         return None
 
 def eliminar_pedia(uid):
@@ -240,6 +240,5 @@ def actualizar_admin(uid, datos_actualizados):
         db.child("usuarios").child(uid).update(datos_actualizados)
         return True
     except Exception as e:
-        print(f"Error al actualizar administrador: {str(e)}")
+        print(f"Error al actualizar admin: {str(e)}")
         return False
-
